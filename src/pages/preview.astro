@@ -1,0 +1,25 @@
+<script>
+	import { client } from "../prismic";
+
+	const init = async () => {
+		const defaultUrl = "/";
+		const url = await client.resolvePreviewURL({
+			linkResolver: (doc) => {
+				if (doc.isBroken) {
+					return "/404";
+				} else if (doc.type === "homepage") {
+					return `/`;
+				} else {
+					return `/${doc.type}`;
+				}
+				// add more pages (a.k.a redirects) ...
+			},
+			defaultURL: defaultUrl,
+		});
+		window.location.replace(url);
+	};
+
+	init();
+</script>
+
+<div>Loading the preview</div>

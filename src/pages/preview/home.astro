@@ -1,0 +1,27 @@
+---
+import { getByRef } from "../../prismic";
+import SliceZone from "../../slices/SliceZone.vue";
+import { components } from "../../slices";
+import Layout from "../../layouts/Layout.astro";
+import PrismicPreview from "../../layouts/PrismicPreview.astro";
+import type { HomepageDocumentData } from "../../../prismicio-types";
+
+export const prerender = false;
+
+const previewCookie = Astro.cookies.get("io.prismic.preview")?.value;
+
+if (!previewCookie) {
+	return Astro.redirect("/404");
+}
+const data = (await getByRef(previewCookie)) as HomepageDocumentData;
+---
+
+<Layout isPreview='true'>
+	<PrismicPreview>
+		{
+			data?.slices && data.slices.length > 0 && (
+				<SliceZone slices={data.slices} components={components} />
+			)
+		}
+	</PrismicPreview>
+</Layout>

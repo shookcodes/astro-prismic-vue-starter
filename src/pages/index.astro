@@ -1,16 +1,22 @@
 ---
+import { type DocumentType, getSingle, getByRef } from "../prismic";
+import SliceZone from "../slices/SliceZone.vue";
+import { components } from "../slices";
+import Layout from "../layouts/Layout.astro";
+import type { HomepageDocumentData } from "../../prismicio-types";
 
+export const prerender = false;
+const previewCookie = Astro.cookies.get("io.prismic.preview")?.value;
+
+const data = previewCookie
+	? ((await getByRef(previewCookie)) as HomepageDocumentData)
+	: ((await getSingle("homepage" as DocumentType)) as HomepageDocumentData);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout isPreview={previewCookie ? true : false}>
+	{
+		data?.slices && data.slices.length > 0 && (
+			<SliceZone slices={data.slices} components={components} />
+		)
+	}
+</Layout>
