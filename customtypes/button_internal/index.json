@@ -1,0 +1,32 @@
+{
+  "id": "button_internal",
+  "label": "Button Internal",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "text": {
+        "type": "Text",
+        "config": {
+          "label": "Text",
+          "placeholder": ""
+        }
+      },
+      "link": {
+        "type": "Link",
+        "config": {
+          "label": "Link",
+          "select": "document",
+          "customtypes": ["contact", "homepage"]
+        }
+      }
+    }
+  }
+}

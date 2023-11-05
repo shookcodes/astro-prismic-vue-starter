@@ -1,4 +1,5 @@
 <script setup lang="ts">
+	import { SliceSimulator } from "@slicemachine/adapter-nuxt/simulator";
 	import {
 		SliceZone,
 		type SliceZoneComponents,
@@ -12,5 +13,7 @@
 	defineProps<Props>();
 </script>
 <template>
-	<SliceZone :slices="slices" :components="components" />
+	<SliceSimulator #default="{ slices }">
+		<SliceZone :slices="slices" :components="components" />
+	</SliceSimulator>
 </template>

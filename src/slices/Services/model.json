@@ -1,8 +1,8 @@
 {
-  "id": "testimonial_slice",
+  "id": "services",
   "type": "SharedSlice",
-  "name": "TestimonialSlice",
-  "description": "TestimonialSlice",
+  "name": "Services",
+  "description": "Services",
   "variations": [
     {
       "id": "default",
@@ -38,7 +38,7 @@
             "label": "Cards",
             "select": "document",
             "customtypes": [
-              "testimonial_card"
+              "card"
             ]
           }
         }
